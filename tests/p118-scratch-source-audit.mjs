@@ -51,9 +51,9 @@ test('scratch public-only data files and Owner-only writer boundary',()=>{
       assert.ok(name==='.gitkeep'||pattern.test(name),dir+'/'+name);
   }
   const workflow=content('.github/workflows/nextnudge-save.yml');
-  assert.match(workflow,/github\\.repository == 'reallakshman19\\/NextNudge-P118-Scratch'/);
-  assert.match(workflow,/github\\.event\\.issue\\.user\\.login == github\\.repository_owner/);
-  assert.match(workflow,/contains\\(github\\.event\\.issue\\.labels\\.\\*\\.name, 'nextnudge-save'\\)/);
+  assert.ok(workflow.includes("github.repository == 'reallakshman19/NextNudge-P118-Scratch'"));
+  assert.ok(workflow.includes('github.event.issue.user.login == github.repository_owner'));
+  assert.ok(workflow.includes("contains(github.event.issue.labels.*.name, 'nextnudge-save')"));
   assert.match(workflow,/contents: write/);
   assert.match(workflow,/issues: write/);
   assert.match(workflow,/persist-credentials: false/);
