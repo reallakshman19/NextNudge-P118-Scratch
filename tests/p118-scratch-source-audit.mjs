@@ -43,8 +43,18 @@ test('no active browser, action or project target points to production',()=>{
     assert.match(content(p),/assertScratchRun\(process\.env\.GITHUB_REPOSITORY,event\.repository\?\.full_name\)/,p);
   }
 });
-test('no live production data or issue writer workflow is in staging',()=>{
-  for(const dir of ['site/nextnudge-data/projects','site/nextnudge-data/threads'])
-    assert.deepEqual(fs.readdirSync(path.join(root,dir)),['.gitkeep']);
-  assert.ok(!fs.existsSync(path.join(root,'.github/workflows/nextnudge-save.yml')));
+test('scratch public-only data files and Owner-only writer boundary',()=>{
+  for(const [dir,pattern] of [
+    ['site/nextnudge-data/projects',/^NP-\\d{8}-\\d{6}-[a-f0-9]{4}\\.json$/],
+    ['site/nextnudge-data/threads',/^NN-\\d{8}-\\d{6}-[a-f0-9]{4}\\.md$/]]){
+    for(const name of fs.readdirSync(path.join(root,dir)))
+      assert.ok(name==='.gitkeep'||pattern.test(name),dir+'/'+name);
+  }
+  const workflow=content('.github/workflows/nextnudge-save.yml');
+  assert.match(workflow,/github\\.repository == 'reallakshman19\\/NextNudge-P118-Scratch'/);
+  assert.match(workflow,/github\\.event\\.issue\\.user\\.login == github\\.repository_owner/);
+  assert.match(workflow,/contains\\(github\\.event\\.issue\\.labels\\.\\*\\.name, 'nextnudge-save'\\)/);
+  assert.match(workflow,/contents: write/);
+  assert.match(workflow,/issues: write/);
+  assert.match(workflow,/persist-credentials: false/);
 });

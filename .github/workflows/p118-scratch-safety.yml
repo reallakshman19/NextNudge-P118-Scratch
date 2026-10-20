@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - qa/nn118-stage0-isolation
+      - main
 permissions:
   contents: read
 jobs:
