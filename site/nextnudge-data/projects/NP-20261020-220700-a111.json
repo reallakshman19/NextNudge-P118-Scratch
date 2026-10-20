@@ -16,7 +16,7 @@
   ],
   "fixtures": {
     "5": "P07: browser A wins version N+1; browser B stale N must be rejected.",
-    "1f": "ALPHA · isolated shared fixtures baseline N; public synthetic only."
+    "1f": "ALPHA · winning fixture from physical profile A. Public synthetic."
   },
   "snapshots": [
     {
@@ -24,6 +24,13 @@
       "values": {
         "5": "P07: browser A wins version N+1; browser B stale N must be rejected.",
         "1f": "ALPHA · isolated shared fixtures baseline N; public synthetic only."
+      }
+    },
+    {
+      "at": "2026-10-20T18:18:01.000Z",
+      "values": {
+        "5": "P07: browser A wins version N+1; browser B stale N must be rejected.",
+        "1f": "ALPHA · winning fixture from physical profile A. Public synthetic."
       }
     }
   ]
