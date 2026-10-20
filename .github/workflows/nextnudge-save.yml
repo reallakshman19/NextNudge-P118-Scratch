@@ -1,0 +1,35 @@
+# P118 scratch-only writer. Production main must NEVER be an Actions write target.
+name: P118 scratch NextNudge owner-only save
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: nextnudge-save-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  owner-save:
+    if: github.repository == 'reallakshman19/NextNudge-P118-Scratch' && contains(github.event.issue.labels.*.name, 'nextnudge-save') && github.event.issue.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out main for validator and writer
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply checked, owner-submitted packet
+        # The issue body is read via the GitHub API by Node, never interpolated into shell.
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/nextnudge_apply.mjs
