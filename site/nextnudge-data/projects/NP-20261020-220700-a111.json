@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "id": "NP-20261020-220700-a111",
+  "name": "P118 ALPHA public synthetic remote CAS",
+  "threads": [
+    {
+      "id": "NN-20261020-205600-a101",
+      "agent": "G1",
+      "legacy": false
+    },
+    {
+      "id": "NN-20261020-205700-a102",
+      "agent": "G2",
+      "legacy": false
+    }
+  ],
+  "fixtures": {
+    "5": "P07: browser A wins version N+1; browser B stale N must be rejected.",
+    "1f": "ALPHA · isolated shared fixtures baseline N; public synthetic only."
+  },
+  "snapshots": [
+    {
+      "at": "2026-10-20T18:07:00.000Z",
+      "values": {
+        "5": "P07: browser A wins version N+1; browser B stale N must be rejected.",
+        "1f": "ALPHA · isolated shared fixtures baseline N; public synthetic only."
+      }
+    }
+  ]
+}
