@@ -1,0 +1,21 @@
+name: P118 scratch isolated read-only safety audit
+on:
+  push:
+    branches:
+      - qa/nn118-stage0-isolation
+permissions:
+  contents: read
+jobs:
+  audit:
+    if: github.repository == 'reallakshman19/NextNudge-P118-Scratch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Scratch-only source and negative assertion checks
+        run: node --test tests/p118-scratch-*.mjs
