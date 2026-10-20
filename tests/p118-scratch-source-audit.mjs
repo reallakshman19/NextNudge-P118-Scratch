@@ -45,8 +45,8 @@ test('no active browser, action or project target points to production',()=>{
 });
 test('scratch public-only data files and Owner-only writer boundary',()=>{
   for(const [dir,pattern] of [
-    ['site/nextnudge-data/projects',/^NP-\\d{8}-\\d{6}-[a-f0-9]{4}\\.json$/],
-    ['site/nextnudge-data/threads',/^NN-\\d{8}-\\d{6}-[a-f0-9]{4}\\.md$/]]){
+    ['site/nextnudge-data/projects',/^NP-\d{8}-\d{6}-[a-f0-9]{4}\.json$/],
+    ['site/nextnudge-data/threads',/^NN-\d{8}-\d{6}-[a-f0-9]{4}\.md$/]]){
     for(const name of fs.readdirSync(path.join(root,dir)))
       assert.ok(name==='.gitkeep'||pattern.test(name),dir+'/'+name);
   }
