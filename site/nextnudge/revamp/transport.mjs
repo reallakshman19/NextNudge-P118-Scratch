@@ -2,6 +2,7 @@ import {assertScratchRepo} from './scratch-identity.mjs';
 import {assertPublic,validate,freshId,activeIntent} from './thread.mjs';
 import {makeReply,replyAcks} from './reply.mjs';
 import {REPO} from './save.mjs';
+import {answered} from './status.mjs';
 const PREFIX='GITHUB_SEND_V1:';
 export function targetOf(target){
   assertScratchRepo(REPO);
@@ -45,6 +46,7 @@ export async function sendNudge(thread,move,input,api){
 }
 export async function fetchReturn(thread,moveId,api){
   const sent=thread.moves.find(m=>m.id===moveId&&m.delivery==='sent');
+  if(answered(thread,sent))return null;
   const receipt=sentTarget(sent),target=targetOf(receipt.target);
   const comments=await api.listComments(target);
   const matches=comments.filter(c=>{
