@@ -1,0 +1,26 @@
+name: P118 R3 answered-move regression (scratch only)
+on:
+  push:
+    branches:
+      - fix/nn118-p08-r3-answered-guard
+  pull_request:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  guard:
+    if: github.repository == 'reallakshman19/NextNudge-P118-Scratch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Writer-boundary R3 regression
+        run: node --test tests/p118-r3-answered-guard.mjs
+      - name: Existing scratch safety tests
+        run: node --test tests/p118-scratch-*.mjs
