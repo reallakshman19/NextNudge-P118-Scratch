@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "NP-20261021-030806-6602",
+  "name": "P118 AGUI native qualification synthetic 1792552086204",
+  "threads": [],
+  "fixtures": {
+    "5": "P07: browser A wins version N+1; browser B stale N must be rejected.",
+    "1f": "ALPHA · isolated shared fixtures baseline N; public synthetic only."
+  },
+  "snapshots": [
+    {
+      "at": "2026-10-21T03:08:08.232Z",
+      "values": {
+        "5": "P07: browser A wins version N+1; browser B stale N must be rejected.",
+        "1f": "ALPHA · isolated shared fixtures baseline N; public synthetic only."
+      }
+    }
+  ]
+}
